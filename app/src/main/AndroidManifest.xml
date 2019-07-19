@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.HomeActivity"
+        <activity
+            android:name=".Activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -41,8 +42,9 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.mobileVerificationActivity" />
         <activity android:name=".Activity.Pin_generation_activity" />
-        <activity
-            android:name=".Activity.Registration_Successful_activity"></activity>
+        <activity android:name=".Activity.Registration_Successful_activity" />
+        <activity android:name=".Activity.Vote_Successful_Activity" />
+        <activity android:name=".Activity.Pin_Verification_Activity"></activity>
     </application>
 
 </manifest>

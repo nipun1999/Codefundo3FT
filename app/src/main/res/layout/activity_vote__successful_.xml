@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.Vote_Successful_Activity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_marginTop="20dp"/>
+
+
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:src="@drawable/voting"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:fontFamily="@font/ralewaysemibold"
+        android:layout_marginTop="30dp"
+        android:text="Your vote for the candidate is successful"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="16dp"
+        android:text="Your vote is secured by the Azure blockchain technology which is decentralised that means no one can tamper or change the vote and you can see live results in the results section"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="24dp"
+        android:textColor="@android:color/white"
+        android:text="HOME"
+        android:background="@drawable/curved_pink_button"/>
+
+</LinearLayout>

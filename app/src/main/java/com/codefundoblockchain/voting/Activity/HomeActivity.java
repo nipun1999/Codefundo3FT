@@ -1,5 +1,6 @@
 package com.codefundoblockchain.voting.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -90,9 +91,17 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+            transaction.replace(R.id.content, new Candidate_detail_fragment()).addToBackStack("tag").commit();
+
         } else if (id == R.id.nav_manage) {
 
+            Intent intent = new Intent(HomeActivity.this,Vote_Successful_Activity.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_share) {
+
+            Intent intent = new Intent(HomeActivity.this,Pin_Verification_Activity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
 
