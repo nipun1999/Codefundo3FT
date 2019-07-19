@@ -1,0 +1,13 @@
+{
+  "client_id" : "35c36543-8455-46a5-b470-25ff1d027cc7",
+  "authorization_user_agent" : "DEFAULT",
+  "redirect_uri" : "msauth://com.codefundoblockchain.voting/qb3n2EIiZbabDVnz%2B605CG4Ain8%3D",
+  "authorities" : [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "AzureADMultipleOrgs"
+      }
+    }
+  ]
+}

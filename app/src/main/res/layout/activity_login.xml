@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_screen_gradient"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_width="305dp"
+        android:layout_height="292dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:src="@mipmap/login_vector"/>
+
+    <TextView
+        android:layout_marginTop="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/ralewaybold"
+        android:gravity="center"
+        android:text="Voting redefined through blockchain"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:fontFamily="@font/ralewaybold"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:textColor="@android:color/white"
+        android:text="Convenient,Faster, Reliable,Secure"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:text="GET STARTED"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="16dp"
+        android:textColor="@color/colorTextBlue"
+        android:background="@drawable/rectangle_button"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Not a user yet ? Register"
+        android:textSize="14dp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ralewaysemibold"/>
+
+
+
+
+
+
+
+
+</LinearLayout>

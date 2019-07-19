@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".Activity.Walkthrough">
+
+
+
+
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/positive_vote"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="24dp"
+        android:fontFamily="@font/ralewaybold"
+        android:textColor="@color/colorTextBlue"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="What is VotZure ?"/>
+
+
+    <TextView
+        android:layout_width="302dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp"
+        android:fontFamily="@font/ralewaymedium"
+        android:textColor="@color/colorTextBlue"
+        android:text="VotZure is a platform developed to make ballot system more secure, faster, reliable and convenient "
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+
+
+
+</LinearLayout>

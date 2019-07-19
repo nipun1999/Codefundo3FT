@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".Activity.mobileVerificationActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/verification"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:fontFamily="@font/ralewaysemibold"
+        android:layout_marginTop="50dp"
+        android:text="Please Enter OTP To Verify"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/otp1EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+        <EditText
+            android:id="@+id/otp2EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:maxLength="1"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+        <EditText
+            android:id="@+id/otp3EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:maxLength="1"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+        <EditText
+            android:id="@+id/otp4EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:maxLength="1"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+        <EditText
+            android:id="@+id/otp5EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+        <EditText
+            android:id="@+id/otp6EdtTxt"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:maxLength="1"
+            android:fontFamily="@font/ralewaysemibold"/>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/getStartedBtn"
+        android:layout_width="302dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="VERIFY"
+        android:fontFamily="@font/ralewaysemibold"
+        android:textSize="24dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/curved_pink_button"/>
+
+
+</LinearLayout>
