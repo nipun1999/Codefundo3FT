@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".Utils.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,38 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme">
+            android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="com.codefundoblockchain.voting"
-                    android:path="/qb3n2EIiZbabDVnz+605CG4Ain8="
-                    android:scheme="msauth" />
-            </intent-filter>
-        </activity>
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".Activity.Walkthrough" />
         <activity android:name=".Activity.SplashScreen" />
         <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.mobileVerificationActivity" />
         <activity android:name=".Activity.Pin_generation_activity" />
+        <activity android:name=".Activity.mobileVerificationActivity" />
         <activity android:name=".Activity.Registration_Successful_activity" />
         <activity android:name=".Activity.Vote_Successful_Activity" />
-        <activity android:name=".Activity.Pin_Verification_Activity"></activity>
+        <activity android:name=".Activity.Pin_Verification_Activity" />
+        <activity android:name=".Activity.MicrosoftLoginActivity"></activity>
     </application>
 
 </manifest>

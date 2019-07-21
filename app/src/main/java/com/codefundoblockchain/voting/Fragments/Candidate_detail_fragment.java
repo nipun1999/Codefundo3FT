@@ -1,4 +1,4 @@
-package com.codefundoblockchain.voting.Activity;
+package com.codefundoblockchain.voting.Fragments;
 
 
 import android.os.Bundle;

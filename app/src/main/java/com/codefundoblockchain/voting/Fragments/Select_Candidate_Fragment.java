@@ -1,4 +1,4 @@
-package com.codefundoblockchain.voting.Activity;
+package com.codefundoblockchain.voting.Fragments;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.codefundoblockchain.voting.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Home_Fragment extends Fragment {
+public class Select_Candidate_Fragment extends Fragment {
 
 
-    public Home_Fragment() {
+    public Select_Candidate_Fragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Home_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_, container, false);
+        return inflater.inflate(R.layout.fragment_select__candidate_, container, false);
     }
 
 }

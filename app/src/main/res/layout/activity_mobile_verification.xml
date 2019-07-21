@@ -32,73 +32,84 @@
         android:text="Please Enter OTP To Verify"/>
 
 
-    <LinearLayout
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/otpPinView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/otp1EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="50dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp2EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp3EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp4EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp5EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="50dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp6EdtTxt"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
+        android:layout_marginTop="20dp"
+        app:pinLength="6"
+        app:pinHeight="40dp"
+        app:pinWidth="40dp"
+        app:inputType="number"
+        android:layout_height="wrap_content"></com.goodiebag.pinview.Pinview>
 
 
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="20dp">-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp1EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:maxLength="1"-->
+            <!--android:textSize="50dp"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp2EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="50dp"-->
+            <!--android:maxLength="1"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp3EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="50dp"-->
+            <!--android:maxLength="1"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp4EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="50dp"-->
+            <!--android:maxLength="1"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp5EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:maxLength="1"-->
+            <!--android:textSize="50dp"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/otp6EdtTxt"-->
+            <!--android:inputType="number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="50dp"-->
+            <!--android:maxLength="1"-->
+            <!--android:fontFamily="@font/ralewaysemibold"/>-->
+
+
+    <!--</LinearLayout>-->
 
 
     <Button
-        android:id="@+id/getStartedBtn"
+        android:id="@+id/otpVerifyBtn"
         android:layout_width="302dp"
         android:layout_height="54dp"
         android:layout_gravity="center"

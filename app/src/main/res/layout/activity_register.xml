@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="First Name"
+        android:hint="Last Name"
         android:fontFamily="@font/ralewayregular"
         android:textSize="18dp"
         android:textAlignment="center"
@@ -91,7 +91,7 @@
 
 
     <Button
-        android:id="@+id/getStartedBtn"
+        android:id="@+id/registerBtn"
         android:layout_width="302dp"
         android:layout_height="54dp"
         android:layout_gravity="center"

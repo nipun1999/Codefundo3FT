@@ -49,7 +49,7 @@
 
 
     <Button
-        android:id="@+id/getStartedBtn"
+        android:id="@+id/proceedBtn"
         android:layout_width="302dp"
         android:layout_height="54dp"
         android:layout_gravity="center"

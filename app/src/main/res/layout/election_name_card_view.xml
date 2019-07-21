@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
 
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,6 +18,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/titleUpcomingElection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -31,6 +31,7 @@
 
 
         <TextView
+            android:id="@+id/descUpcomingElection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"

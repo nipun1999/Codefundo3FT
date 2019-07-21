@@ -31,69 +31,15 @@
         android:layout_marginTop="30dp"
         android:text="Please Enter 6 digit PIN"/>
 
-    <LinearLayout
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/verifyPinView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/otp1EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="30dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp2EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp3EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp4EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp5EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="30dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp6EdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-
-    </LinearLayout>
+        android:layout_marginTop="20dp"
+        app:pinLength="6"
+        app:pinHeight="40dp"
+        app:pinWidth="40dp"
+        app:inputType="number"
+        android:layout_height="wrap_content"></com.goodiebag.pinview.Pinview>
 
 
     <TextView
@@ -106,73 +52,19 @@
         android:layout_marginTop="20dp"
         android:text="Please Re-enter 6 digit PIN"/>
 
-    <LinearLayout
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/reVerifyPinView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/otp1ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="30dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp2ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp3ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp4ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp5ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:textSize="30dp"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-        <EditText
-            android:id="@+id/otp6ReEdtTxt"
-            android:inputType="numberPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:maxLength="1"
-            android:fontFamily="@font/ralewaysemibold"/>
-
-
-    </LinearLayout>
+        android:layout_marginTop="20dp"
+        app:pinLength="6"
+        app:pinHeight="40dp"
+        app:pinWidth="40dp"
+        app:inputType="number"
+        android:layout_height="wrap_content"></com.goodiebag.pinview.Pinview>
 
 
     <Button
-        android:id="@+id/getStartedBtn"
+        android:id="@+id/pinRegisterBtn"
         android:layout_width="302dp"
         android:layout_height="54dp"
         android:layout_gravity="center"
