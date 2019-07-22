@@ -84,6 +84,7 @@ public class Pin_generation_activity extends AppCompatActivity {
                 database.child("aadharNo").setValue(sessionManager.getAADHAR_NO());
                 database.child("firstName").setValue(sessionManager.getFIRST_NAME());
                 database.child("lastName").setValue(sessionManager.getLAST_NAME());
+                database.child("newUser").setValue("true");
                 database.child("pin").setValue(hash);
                 Intent intent = new Intent(Pin_generation_activity.this,Registration_Successful_activity.class);
                 startActivity(intent);

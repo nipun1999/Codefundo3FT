@@ -60,7 +60,7 @@ public class Walkthrough extends AppCompatActivity {
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent dashbaord = new Intent(Walkthrough.this, MainActivity.class);
+                Intent dashbaord = new Intent(Walkthrough.this, HomeActivity.class);
                 finish();
                 startActivity(dashbaord);
             }

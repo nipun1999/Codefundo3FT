@@ -105,6 +105,7 @@ public class Select_Candidate_Fragment extends Fragment {
                             AllCandidatesModel allCandidates = new AllCandidatesModel();
                             allCandidates.setName(response.body().getContracts().get(i).getContractProperties().get(4).getValue());
                             allCandidates.setParty(response.body().getContracts().get(i).getContractProperties().get(3).getValue());
+                           allCandidates.setId(response.body().getContracts().get(i).getId().toString());
                             candidatesList.add(allCandidates);
                         }
                         allCandidatesRecyclerAdapter.notifyDataSetChanged();

@@ -18,6 +18,7 @@ import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
 import com.codefundoblockchain.voting.RecyclerModels.AllCandidatesModel;
 import com.codefundoblockchain.voting.RecyclerModels.ElectionDetailsModel;
+import com.codefundoblockchain.voting.Utils.SessionManager;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class GetAllCandidatesRecyclerAdapter extends RecyclerView.Adapter<GetAll
     private List<AllCandidatesModel> candidatesList;
     private View itemView;
     private Context mcontext;
+    private SessionManager sessionManager;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name,party;
@@ -35,6 +37,7 @@ public class GetAllCandidatesRecyclerAdapter extends RecyclerView.Adapter<GetAll
             super(view);
             name = view.findViewById(R.id.candidateName);
             party = view.findViewById(R.id.candidateParty);
+            sessionManager = new SessionManager(mcontext);
 
         }
     }
@@ -68,8 +71,9 @@ public class GetAllCandidatesRecyclerAdapter extends RecyclerView.Adapter<GetAll
                 Candidate_detail_fragment Candidate = new Candidate_detail_fragment();
                 Bundle bundle=new Bundle();
                 bundle.putString("id",candidatesList.get(position).getId());
-                bundle.putString("name",candidates.getName());
-                bundle.putString("party",candidates.getParty());
+                bundle.putString("name",candidatesList.get(position).getName());
+                bundle.putString("party",candidatesList.get(position).getParty());
+                sessionManager.setCONTRACT_ID(candidatesList.get(position).getId());
                 Candidate.setArguments(bundle);
                 transaction.replace(R.id.content, Candidate).addToBackStack("tag").commit();
             }

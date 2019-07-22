@@ -3,6 +3,8 @@ package com.codefundoblockchain.voting.retrofit;
 import android.util.Log;
 
 import com.codefundoblockchain.voting.Utils.App;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -18,12 +20,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AzureApiClient {
     private static ApiInterface apiInterface;
 
+    private static Gson gson = new GsonBuilder().serializeNulls().create();
+
 
     public static ApiInterface getClient() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://electblockchain-2vifev-api.azurewebsites.net/")
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient()).build();
 
             apiInterface = retrofit.create(ApiInterface.class);

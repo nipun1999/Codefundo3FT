@@ -34,6 +34,7 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
     private ProgressDialog pd;
     private DatabaseReference mdatabase;
     private int flag = 0;
+    private String newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +125,12 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                                 Log.e("register",profile.child("email").getValue().toString());
 
                                 if(profile.child("email").getValue().toString().equals(email)){
+
                                     sessionManager.setMOBILE_NO(profile.child("mobileNo").getValue().toString());
                                     sessionManager.setUSER_ID(profile.getKey());
                                     sessionManager.setFIRST_NAME(profile.child("firstName").getValue().toString());
                                     sessionManager.setLAST_NAME(profile.child("lastName").getValue().toString());
+                                    newUser = profile.child("newUser").getValue().toString();
                                     Log.e("register","inside final");
                                     flag = 1;
                                     Log.e("register",Integer.toString(flag));
@@ -136,8 +139,16 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                             }
 
                             if(flag==1){
-                                Intent intent = new Intent(MicrosoftLoginActivity.this,HomeActivity.class);
-                                startActivity(intent);
+                                Log.e("login",newUser);
+                                if(newUser.equals("true")){
+                                    mdatabase.child(sessionManager.getUSER_ID()).child("newUser").setValue("false");
+                                    Intent intent = new Intent(MicrosoftLoginActivity.this,Walkthrough.class);
+                                    startActivity(intent);
+                                }else{
+                                    Intent intent = new Intent(MicrosoftLoginActivity.this,HomeActivity.class);
+                                    startActivity(intent);
+                                }
+
                             }else{
                                 Toast.makeText(MicrosoftLoginActivity.this, "User is not registered", Toast.LENGTH_SHORT).show();
                             }
