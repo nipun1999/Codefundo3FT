@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codefundoblockchain.voting.APIModels.GetAllElections;
+import com.codefundoblockchain.voting.Activity.HomeActivity;
+import com.codefundoblockchain.voting.Activity.MicrosoftLoginActivity;
 import com.codefundoblockchain.voting.Adapters.UpcomingElectionsRecyclerAdapter;
 import com.codefundoblockchain.voting.Adapters.WhatsNewRecyclerAdapter;
 import com.codefundoblockchain.voting.R;
@@ -23,6 +25,11 @@ import com.codefundoblockchain.voting.RecyclerModels.WhatsNewModel;
 import com.codefundoblockchain.voting.Utils.App;
 import com.codefundoblockchain.voting.Utils.SessionManager;
 import com.codefundoblockchain.voting.retrofit.AzureApiClient;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +48,7 @@ public class Home_Fragment extends Fragment {
     private WhatsNewRecyclerAdapter newsRecyclerAdapter;
     private List<ElectionDetailsModel> electionsList = new ArrayList<>();
     private UpcomingElectionsRecyclerAdapter electionsRecyclerAdapter;
+    private DatabaseReference mdatabase;
 
     private SessionManager sessionManager;
 
@@ -63,25 +71,26 @@ public class Home_Fragment extends Fragment {
         RecyclerView.LayoutManager newsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
 
 
+        mdatabase = FirebaseDatabase.getInstance().getReference().child("news");
         RecyclerView.LayoutManager electionsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
 
-        WhatsNewModel news = new WhatsNewModel();
-        news.setTitle("Lok Sabha Elections");
-        newsList.add(news);
-        newsList.add(news);
-        newsList.add(news);
-        newsList.add(news);
-        newsList.add(news);
+//        WhatsNewModel news = new WhatsNewModel();
+//        news.setTitle("Lok Sabha Elections");
+//        newsList.add(news);
+//        newsList.add(news);
+//        newsList.add(news);
+//        newsList.add(news);
+//        newsList.add(news);
 
-        ElectionDetailsModel elections = new ElectionDetailsModel();
-        elections.setDesc("jsdhjehdehf eufh efh eufuh euf huefh eufg eufg euf ");
-        elections.setTitle("Lok Sabha Elections");
-        electionsList.add(elections);
-        electionsList.add(elections);
-        electionsList.add(elections);
-        electionsList.add(elections);
-        electionsList.add(elections);
-        electionsList.add(elections);
+//        ElectionDetailsModel elections = new ElectionDetailsModel();
+//        elections.setDesc("jsdhjehdehf eufh efh eufuh euf huefh eufg eufg euf ");
+//        elections.setTitle("Lok Sabha Elections");
+//        electionsList.add(elections);
+//        electionsList.add(elections);
+//        electionsList.add(elections);
+//        electionsList.add(elections);
+//        electionsList.add(elections);
+//        electionsList.add(elections);
 
 
         electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList);
@@ -97,26 +106,12 @@ public class Home_Fragment extends Fragment {
         UpcomingElectionsRecycler.setAdapter(electionsRecyclerAdapter);
 
 
+        getAllElections();
 
-//        retrofit2.Call<GetAllElections> call = AzureApiClient.getClient().getAllElections();
-//        call.enqueue(new Callback<GetAllElections>() {
-//            @Override
-//            public void onResponse(retrofit2.Call<GetAllElections> call, Response<GetAllElections> response) {
-//                if(response.code()==200){
-//                    Toast.makeText(getActivity(), response.body().getApplications().get(0).getDisplayName(), Toast.LENGTH_SHORT).show();
-//                }else if(response.code()==401){
-//                    Toast.makeText(getActivity(), "Unauthorized", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
-//                    Log.e("GetAllElections",Integer.toString(response.code()));
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(retrofit2.Call<GetAllElections> call, Throwable t) {
-//                Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        getAllWhatsNew();
+
+
+
 
 
 
@@ -127,6 +122,68 @@ public class Home_Fragment extends Fragment {
 
 
         return view;
+
+    }
+
+    private void getAllWhatsNew() {
+
+        mdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot AllNews : dataSnapshot.getChildren()){
+                    WhatsNewModel news = new WhatsNewModel();
+                    news.setTitle(AllNews.child("title").getValue().toString());
+                    newsList.add(news);
+                }
+                newsRecyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void getAllElections() {
+
+        retrofit2.Call<GetAllElections> call = AzureApiClient.getClient().getAllElections();
+        call.enqueue(new Callback<GetAllElections>() {
+            @Override
+            public void onResponse(retrofit2.Call<GetAllElections> call, Response<GetAllElections> response) {
+                if(response.code()==200){
+
+
+                    if(response.body().getApplications().size()!=0){
+                        for(int i=0;i<response.body().getApplications().size();i++){
+                            ElectionDetailsModel elections = new ElectionDetailsModel();
+                            String name = response.body().getApplications().get(i).getDisplayName();
+                            String desc = response.body().getApplications().get(i).getDescription();
+                            elections.setTitle(name);
+                            elections.setDesc(desc);
+                            electionsList.add(elections);
+                        }
+
+                        electionsRecyclerAdapter.notifyDataSetChanged();
+                    }
+//                    Toast.makeText(getActivity(), response.body().getApplications().get(0).getDisplayName(), Toast.LENGTH_SHORT).show();
+                }else if(response.code()==401){
+                    Toast.makeText(getActivity(), "Unauthorized", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(),MicrosoftLoginActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    Log.e("GetAllElections",Integer.toString(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<GetAllElections> call, Throwable t) {
+                Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
