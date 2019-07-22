@@ -1,6 +1,7 @@
 package com.codefundoblockchain.voting.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,7 @@ public class Home_Fragment extends Fragment {
     private DatabaseReference mdatabase;
 
     private SessionManager sessionManager;
+    private ProgressDialog pd;
 
     public Home_Fragment() {
         // Required empty public constructor
@@ -93,7 +95,7 @@ public class Home_Fragment extends Fragment {
 //        electionsList.add(elections);
 
 
-        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList);
+        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity());
         newsRecyclerAdapter = new WhatsNewRecyclerAdapter(newsList);
 
         whatsNewRecycler.setLayoutManager(newsLayoutManager);
@@ -104,6 +106,10 @@ public class Home_Fragment extends Fragment {
         UpcomingElectionsRecycler.setLayoutManager(electionsLayoutManager);
         UpcomingElectionsRecycler.setItemAnimator(new DefaultItemAnimator());
         UpcomingElectionsRecycler.setAdapter(electionsRecyclerAdapter);
+
+        pd = new ProgressDialog(getActivity());
+        pd.setMessage("loading");
+        pd.setCancelable(false);
 
 
         getAllElections();
@@ -126,10 +132,13 @@ public class Home_Fragment extends Fragment {
     }
 
     private void getAllWhatsNew() {
+        pd.show();
 
         mdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                pd.dismiss();
+                newsList.clear();
                 for(DataSnapshot AllNews : dataSnapshot.getChildren()){
                     WhatsNewModel news = new WhatsNewModel();
                     news.setTitle(AllNews.child("title").getValue().toString());
@@ -140,18 +149,20 @@ public class Home_Fragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                pd.dismiss();
             }
         });
 
     }
 
     private void getAllElections() {
-
+        electionsList.clear();
+        pd.show();
         retrofit2.Call<GetAllElections> call = AzureApiClient.getClient().getAllElections();
         call.enqueue(new Callback<GetAllElections>() {
             @Override
             public void onResponse(retrofit2.Call<GetAllElections> call, Response<GetAllElections> response) {
+                pd.dismiss();
                 if(response.code()==200){
 
 
@@ -160,8 +171,10 @@ public class Home_Fragment extends Fragment {
                             ElectionDetailsModel elections = new ElectionDetailsModel();
                             String name = response.body().getApplications().get(i).getDisplayName();
                             String desc = response.body().getApplications().get(i).getDescription();
+                            String appId = Integer.toString(response.body().getApplications().get(i).getId());
                             elections.setTitle(name);
                             elections.setDesc(desc);
+                            elections.setAppId(appId);
                             electionsList.add(elections);
                         }
 
@@ -180,6 +193,7 @@ public class Home_Fragment extends Fragment {
 
             @Override
             public void onFailure(retrofit2.Call<GetAllElections> call, Throwable t) {
+                pd.dismiss();
                 Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });

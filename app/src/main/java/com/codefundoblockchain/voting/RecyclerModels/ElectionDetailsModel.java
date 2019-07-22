@@ -2,7 +2,18 @@ package com.codefundoblockchain.voting.RecyclerModels;
 
 public class ElectionDetailsModel {
 
-    String title,desc;
+    String title;
+    String desc;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    String appId;
 
     public ElectionDetailsModel(){
 
@@ -24,9 +35,10 @@ public class ElectionDetailsModel {
         this.desc = desc;
     }
 
-    public ElectionDetailsModel(String title, String desc) {
+    public ElectionDetailsModel(String title, String desc,String appId) {
         this.title = title;
         this.desc = desc;
+        this.appId = appId;
     }
 
 

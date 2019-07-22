@@ -104,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         Intent intent = new Intent(RegisterActivity.this,mobileVerificationActivity.class);
+                        intent.putExtra("activity","register");
                         startActivity(intent);
 //                DatabaseReference database = mdatabase.push();
 //                database.child("firstName").setValue(firstName);

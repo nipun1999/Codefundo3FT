@@ -29,6 +29,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/candidateName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nipun Agarwal"
@@ -38,6 +39,7 @@
 
 
             <TextView
+                android:id="@+id/candidateParty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bhartiya Janta Party"
@@ -48,6 +50,7 @@
 
 
             <TextView
+                android:id="@+id/candidateAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18"
@@ -57,6 +60,7 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
+                android:id="@+id/candidateArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ghaziabad"
@@ -96,6 +100,7 @@
 
 
             <TextView
+                android:id="@+id/candidateAssets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

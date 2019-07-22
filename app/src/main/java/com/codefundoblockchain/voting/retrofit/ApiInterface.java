@@ -1,5 +1,6 @@
 package com.codefundoblockchain.voting.retrofit;
 
+import com.codefundoblockchain.voting.APIModels.GetAllCandidates;
 import com.codefundoblockchain.voting.APIModels.GetAllElections;
 import com.codefundoblockchain.voting.APIModels.CreateOTPModel;
 import com.codefundoblockchain.voting.APIModels.GetUserInfo;
@@ -10,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -29,5 +31,8 @@ public interface ApiInterface {
 
     @GET("api/v1/users/me")
     Call<GetUserInfo> getUserInfo();
+
+    @GET("api/v1/contracts")
+    Call<GetAllCandidates> getAllCandidates(@Query("workflowId") String id);
 
 }

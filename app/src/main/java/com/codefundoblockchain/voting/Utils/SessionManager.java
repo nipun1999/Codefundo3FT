@@ -16,11 +16,23 @@ public class SessionManager{
     private String AADHAR_NO = "aadhar_no";
     private String FIRST_NAME = "first_name";
     private String LAST_NAME = "last_name";
+    private String APPLICATION_ID = "application_id";
+    private String CONTRACT_ID = "contract_id";
+    private String USER_ID = "user_id";
 
     public SessionManager(Context context) {
         this.ctx = context;
         sharedPreferences = ctx.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = sharedPreferences.edit();
+    }
+
+    public String getUSER_ID(){
+        return sharedPreferences.getString(USER_ID,null);
+    }
+
+    public void setUSER_ID(String id){
+        editor.putString(USER_ID,id);
+        editor.commit();
     }
 
     public String getAADHAR_NO(){
@@ -30,6 +42,24 @@ public class SessionManager{
     public void setAADHAR_NO(String aadharNo){
         editor.putString(AADHAR_NO,aadharNo);
         editor.commit();
+    }
+
+    public void setCONTRACT_ID(String id){
+        editor.putString(CONTRACT_ID,id);
+        editor.commit();
+    }
+
+    public String getCONTRACT_ID(){
+        return sharedPreferences.getString(CONTRACT_ID,null);
+    }
+
+    public void setAPPLICATION_ID(String id){
+        editor.putString(APPLICATION_ID,id);
+        editor.commit();
+    }
+
+    public String getAPPLICATION_ID(){
+        return sharedPreferences.getString(APPLICATION_ID,null);
     }
 
     public String getLAST_NAME(){

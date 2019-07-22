@@ -1,12 +1,20 @@
 package com.codefundoblockchain.voting.Adapters;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.codefundoblockchain.voting.Fragments.Home_Fragment;
+import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
 import com.codefundoblockchain.voting.RecyclerModels.ElectionDetailsModel;
 import com.codefundoblockchain.voting.RecyclerModels.WhatsNewModel;
@@ -19,7 +27,7 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
 
     private List<ElectionDetailsModel> electionsList;
     private View itemView;
-
+    private Context mcontext;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title,desc;
 
@@ -31,8 +39,9 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
         }
     }
 
-    public UpcomingElectionsRecyclerAdapter(List<ElectionDetailsModel> electionsList) {
+    public UpcomingElectionsRecyclerAdapter(List<ElectionDetailsModel> electionsList, Context context) {
         this.electionsList = electionsList;
+        this.mcontext = context;
     }
 
 
@@ -52,6 +61,19 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
         ElectionDetailsModel elections = electionsList.get(position);
         holder.title.setText(elections.getTitle());
         holder.desc.setText(elections.getDesc());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Select_Candidate_Fragment getAllCandidates = new Select_Candidate_Fragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("id",electionsList.get(position).getAppId());
+                getAllCandidates.setArguments(bundle);
+                transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commit();
+            }
+        });
 
     }
 

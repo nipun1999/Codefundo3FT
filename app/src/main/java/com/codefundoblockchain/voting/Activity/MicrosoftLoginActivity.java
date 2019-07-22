@@ -124,6 +124,10 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                                 Log.e("register",profile.child("email").getValue().toString());
 
                                 if(profile.child("email").getValue().toString().equals(email)){
+                                    sessionManager.setMOBILE_NO(profile.child("mobileNo").getValue().toString());
+                                    sessionManager.setUSER_ID(profile.getKey());
+                                    sessionManager.setFIRST_NAME(profile.child("firstName").getValue().toString());
+                                    sessionManager.setLAST_NAME(profile.child("lastName").getValue().toString());
                                     Log.e("register","inside final");
                                     flag = 1;
                                     Log.e("register",Integer.toString(flag));
@@ -132,7 +136,6 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                             }
 
                             if(flag==1){
-
                                 Intent intent = new Intent(MicrosoftLoginActivity.this,HomeActivity.class);
                                 startActivity(intent);
                             }else{

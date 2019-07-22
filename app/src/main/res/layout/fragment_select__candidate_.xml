@@ -26,12 +26,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
-        <include layout="@layout/candidate_detail_card"></include>
-
-        <include layout="@layout/candidate_detail_card"></include>
-
-        <include layout="@layout/candidate_detail_card"></include>
-        <include layout="@layout/candidate_detail_card"></include><include layout="@layout/candidate_detail_card"></include><include layout="@layout/candidate_detail_card"></include>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/allCandidatesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 
 

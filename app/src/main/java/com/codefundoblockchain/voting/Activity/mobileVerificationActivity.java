@@ -31,6 +31,7 @@ public class mobileVerificationActivity extends AppCompatActivity {
     private Button otpVerifyBtn;
     private String code;
     private ProgressDialog pd;
+    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class mobileVerificationActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("loading");
         pd.setCancelable(false);
+
+        Intent intent = getIntent();
+        status = intent.getStringExtra("activity");
 
         createOTP();
 
@@ -76,8 +80,14 @@ public class mobileVerificationActivity extends AppCompatActivity {
                     if(response.code()==200){
                         if(response.body().getValid()){
                             Toast.makeText(mobileVerificationActivity.this, "Otp Verified Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(mobileVerificationActivity.this,Pin_generation_activity.class);
-                            startActivity(intent);
+                            if(status.equals("vote")){
+                                Intent intent = new Intent(mobileVerificationActivity.this,Pin_Verification_Activity.class);
+                                startActivity(intent);
+                            }else{
+                                Intent intent = new Intent(mobileVerificationActivity.this,Pin_generation_activity.class);
+                                startActivity(intent);
+                            }
+
                         }else{
                             Toast.makeText(mobileVerificationActivity.this, "OTP Entered is not correct", Toast.LENGTH_SHORT).show();
                         }
