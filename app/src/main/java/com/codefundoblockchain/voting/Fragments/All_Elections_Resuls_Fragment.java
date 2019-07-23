@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codefundoblockchain.voting.APIModels.GetAllElections;
-import com.codefundoblockchain.voting.Activity.HomeActivity;
 import com.codefundoblockchain.voting.Activity.MicrosoftLoginActivity;
+import com.codefundoblockchain.voting.Adapters.GetAllCandidatesResultsAdapter;
 import com.codefundoblockchain.voting.Adapters.UpcomingElectionsRecyclerAdapter;
-import com.codefundoblockchain.voting.Adapters.WhatsNewRecyclerAdapter;
 import com.codefundoblockchain.voting.R;
+import com.codefundoblockchain.voting.RecyclerModels.AllCandidatesResultsModel;
 import com.codefundoblockchain.voting.RecyclerModels.ElectionDetailsModel;
-import com.codefundoblockchain.voting.RecyclerModels.WhatsNewModel;
-import com.codefundoblockchain.voting.Utils.App;
-import com.codefundoblockchain.voting.Utils.SessionManager;
 import com.codefundoblockchain.voting.retrofit.AzureApiClient;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,20 +32,15 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Home_Fragment extends Fragment {
+public class All_Elections_Resuls_Fragment extends Fragment {
 
+    private RecyclerView UpcomingElectionsRecycler;
 
-    public RecyclerView whatsNewRecycler,UpcomingElectionsRecycler;
-    private List<WhatsNewModel> newsList = new ArrayList<>();
-    private WhatsNewRecyclerAdapter newsRecyclerAdapter;
-    private List<ElectionDetailsModel> electionsList = new ArrayList<>();
     private UpcomingElectionsRecyclerAdapter electionsRecyclerAdapter;
-    private DatabaseReference mdatabase;
-
-    private SessionManager sessionManager;
     private ProgressDialog pd;
+    private List<ElectionDetailsModel> electionsList = new ArrayList<>();
 
-    public Home_Fragment() {
+    public All_Elections_Resuls_Fragment() {
         // Required empty public constructor
     }
 
@@ -63,45 +49,11 @@ public class Home_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_, container, false);
-
-
-        whatsNewRecycler = view.findViewById(R.id.whatsNewRecycler);
-        UpcomingElectionsRecycler = view.findViewById(R.id.upcomingElectionsRecycler);
-        sessionManager = new SessionManager(this.getActivity());
-
-        RecyclerView.LayoutManager newsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
-
-
-        mdatabase = FirebaseDatabase.getInstance().getReference().child("news");
+        View view = inflater.inflate(R.layout.fragment_all__elections__resuls_, container, false);
+        UpcomingElectionsRecycler = view.findViewById(R.id.upcomingElectionsResultsRecycler);
         RecyclerView.LayoutManager electionsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
 
-//        WhatsNewModel news = new WhatsNewModel();
-//        news.setTitle("Lok Sabha Elections");
-//        newsList.add(news);
-//        newsList.add(news);
-//        newsList.add(news);
-//        newsList.add(news);
-//        newsList.add(news);
-
-//        ElectionDetailsModel elections = new ElectionDetailsModel();
-//        elections.setDesc("jsdhjehdehf eufh efh eufuh euf huefh eufg eufg euf ");
-//        elections.setTitle("Lok Sabha Elections");
-//        electionsList.add(elections);
-//        electionsList.add(elections);
-//        electionsList.add(elections);
-//        electionsList.add(elections);
-//        electionsList.add(elections);
-//        electionsList.add(elections);
-
-
-        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"vote");
-        newsRecyclerAdapter = new WhatsNewRecyclerAdapter(newsList);
-
-        whatsNewRecycler.setLayoutManager(newsLayoutManager);
-        whatsNewRecycler.setItemAnimator(new DefaultItemAnimator());
-        whatsNewRecycler.setAdapter(newsRecyclerAdapter);
-
+        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"results");
 
         UpcomingElectionsRecycler.setLayoutManager(electionsLayoutManager);
         UpcomingElectionsRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -112,48 +64,13 @@ public class Home_Fragment extends Fragment {
         pd.setCancelable(false);
 
 
+
         getAllElections();
 
-        getAllWhatsNew();
-
-
-
-
-
-
-
-
-
-
-
-
         return view;
-
     }
 
-    private void getAllWhatsNew() {
-        pd.show();
 
-        mdatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                pd.dismiss();
-                newsList.clear();
-                for(DataSnapshot AllNews : dataSnapshot.getChildren()){
-                    WhatsNewModel news = new WhatsNewModel();
-                    news.setTitle(AllNews.child("title").getValue().toString());
-                    newsList.add(news);
-                }
-                newsRecyclerAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                pd.dismiss();
-            }
-        });
-
-    }
 
     private void getAllElections() {
         electionsList.clear();

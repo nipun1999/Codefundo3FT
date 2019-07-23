@@ -151,6 +151,8 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
 
                             }else{
                                 Toast.makeText(MicrosoftLoginActivity.this, "User is not registered", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MicrosoftLoginActivity.this,LoginActivity.class);
+                                startActivity(intent);
                             }
 
                         }

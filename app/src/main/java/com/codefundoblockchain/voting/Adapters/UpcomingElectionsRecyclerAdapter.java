@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
+import com.codefundoblockchain.voting.Fragments.Election_Result_Fragment;
 import com.codefundoblockchain.voting.Fragments.Home_Fragment;
 import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
@@ -26,6 +28,7 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
 
 
     private List<ElectionDetailsModel> electionsList;
+    private String string;
     private View itemView;
     private Context mcontext;
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -39,9 +42,10 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
         }
     }
 
-    public UpcomingElectionsRecyclerAdapter(List<ElectionDetailsModel> electionsList, Context context) {
+    public UpcomingElectionsRecyclerAdapter(List<ElectionDetailsModel> electionsList, Context context, String activity) {
         this.electionsList = electionsList;
         this.mcontext = context;
+        this.string = activity;
     }
 
 
@@ -65,13 +69,24 @@ public class UpcomingElectionsRecyclerAdapter extends RecyclerView.Adapter<Upcom
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                Select_Candidate_Fragment getAllCandidates = new Select_Candidate_Fragment();
-                Bundle bundle=new Bundle();
-                bundle.putString("id",electionsList.get(position).getAppId());
-                getAllCandidates.setArguments(bundle);
-                transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commit();
+                if(string.equals("vote")){
+                    FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    Select_Candidate_Fragment getAllCandidates = new Select_Candidate_Fragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("id",electionsList.get(position).getAppId());
+                    getAllCandidates.setArguments(bundle);
+                    transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commit();
+                }else{
+                    FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    Election_Result_Fragment getAllCandidates = new Election_Result_Fragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("id",electionsList.get(position).getAppId());
+                    getAllCandidates.setArguments(bundle);
+                    transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commit();
+                }
+
             }
         });
 

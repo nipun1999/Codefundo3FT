@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
 import com.codefundoblockchain.voting.Fragments.Candidate_detail_fragment;
 import com.codefundoblockchain.voting.Fragments.Home_Fragment;
 import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
@@ -103,25 +104,23 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
 
-            transaction.replace(R.id.content, new Select_Candidate_Fragment()).addToBackStack("tag").commit();
+            transaction.replace(R.id.content, new Home_Fragment()).addToBackStack("tag").commit();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-            transaction.replace(R.id.content, new Home_Fragment()).addToBackStack("tag").commit();
+            transaction.replace(R.id.content, new All_Elections_Resuls_Fragment()).addToBackStack("tag").commit();
 
         } else if (id == R.id.nav_slideshow) {
 
-            transaction.replace(R.id.content, new Candidate_detail_fragment()).addToBackStack("tag").commit();
+
 
         } else if (id == R.id.nav_manage) {
 
-            Intent intent = new Intent(HomeActivity.this,Vote_Successful_Activity.class);
-            startActivity(intent);
+
 
         } else if (id == R.id.nav_share) {
 
-            Intent intent = new Intent(HomeActivity.this,Pin_Verification_Activity.class);
-            startActivity(intent);
+
 
         } else if (id == R.id.nav_send) {
 
