@@ -10,8 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
 import com.codefundoblockchain.voting.Fragments.Candidate_detail_fragment;
@@ -19,11 +21,17 @@ import com.codefundoblockchain.voting.Fragments.Home_Fragment;
 import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
 import com.codefundoblockchain.voting.Utils.SessionManager;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public SessionManager sessionManager;
+    private IntentIntegrator qrScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,9 @@ public class HomeActivity extends AppCompatActivity
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         transaction.replace(R.id.content, new Home_Fragment()).addToBackStack("tag").commit();
+
+
+        qrScan = new IntentIntegrator(this);
 
 
 
@@ -112,6 +123,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+             qrScan.initiateScan();
 
 
         } else if (id == R.id.nav_manage) {
@@ -129,5 +141,41 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //if qrcode has nothing in it
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+            } else {
+                //if qr contains data
+                try {
+                    //converting the data to json
+                    JSONObject obj = new JSONObject(result.getContents());
+                    //setting values to textviews
+                    String id = obj.getString("id");
+                    Log.e("id",id);
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    Select_Candidate_Fragment getAllCandidates = new Select_Candidate_Fragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("id",id);
+                    getAllCandidates.setArguments(bundle);
+                    transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commitAllowingStateLoss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //if control comes here
+                    //that means the encoded format not matches
+                    //in this case you can display whatever data is available on the qrcode
+                    //to a toast
+                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
