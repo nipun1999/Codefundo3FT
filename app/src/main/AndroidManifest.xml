@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Utils.App"
@@ -14,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.LoginActivity">
+            android:name=".Activity.Vote_Successful_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +34,7 @@
         <activity android:name=".Activity.Pin_generation_activity" />
         <activity android:name=".Activity.mobileVerificationActivity" />
         <activity android:name=".Activity.Registration_Successful_activity" />
-        <activity android:name=".Activity.Vote_Successful_Activity" />
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.Pin_Verification_Activity" />
         <activity android:name=".Activity.MicrosoftLoginActivity"></activity>
     </application>

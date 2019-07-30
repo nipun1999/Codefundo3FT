@@ -1,7 +1,11 @@
 package com.codefundoblockchain.voting.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 
 import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
 import com.codefundoblockchain.voting.Fragments.Candidate_detail_fragment;
+import com.codefundoblockchain.voting.Fragments.GetAllCandidateReviews;
 import com.codefundoblockchain.voting.Fragments.Home_Fragment;
 import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
@@ -32,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
 
     public SessionManager sessionManager;
     private IntentIntegrator qrScan;
+    private String TAG = "permissions";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class HomeActivity extends AppCompatActivity
 
 
         qrScan = new IntentIntegrator(this);
+
+        isReadStoragePermissionGranted();
+        isWriteStoragePermissionGranted();
 
 
 
@@ -128,6 +137,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
+            transaction.replace(R.id.content, new GetAllCandidateReviews()).addToBackStack("tag").commit();
 
 
         } else if (id == R.id.nav_share) {
@@ -176,6 +186,44 @@ public class HomeActivity extends AppCompatActivity
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    public  boolean isReadStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted1");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked1");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 3);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted1");
+            return true;
+        }
+    }
+
+    public  boolean isWriteStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted2");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked2");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted2");
+            return true;
         }
     }
 }
