@@ -86,7 +86,9 @@ public class Pin_generation_activity extends AppCompatActivity {
                 database.child("lastName").setValue(sessionManager.getLAST_NAME());
                 database.child("newUser").setValue("true");
                 database.child("pin").setValue(hash);
-                Intent intent = new Intent(Pin_generation_activity.this,Registration_Successful_activity.class);
+                sessionManager.setUSER_ID(database.getKey());
+
+                Intent intent = new Intent(Pin_generation_activity.this,FaceUploadActivity.class);
                 startActivity(intent);
             }else{
                 pd.dismiss();

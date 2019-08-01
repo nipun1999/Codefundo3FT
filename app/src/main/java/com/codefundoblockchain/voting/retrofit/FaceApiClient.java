@@ -17,7 +17,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AzureApiClient {
+public class FaceApiClient {
     private static ApiInterface apiInterface;
 
     private static Gson gson = new GsonBuilder().serializeNulls().create();
@@ -26,7 +26,7 @@ public class AzureApiClient {
     public static ApiInterface getClient() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://elections2-zekgy4-api.azurewebsites.net")
+                    .baseUrl("https://electionfaceverification.cognitiveservices.azure.com/face/v1.0/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient()).build();
 
@@ -50,8 +50,8 @@ public class AzureApiClient {
                 Request.Builder builder = request.newBuilder();
                 String authToken = App.getInstance().getSessionManager().getBEARER_TOKEN();
                 Log.e("token",App.getInstance().getSessionManager().getBEARER_TOKEN());
-                builder.addHeader("Authorization", "Bearer "+ authToken);
-                builder.addHeader("Content-Type","application/x-www-form-urlencoded");
+                builder.addHeader("Ocp-Apim-Subscription-Key", "6529442affde42a8906f7adb91caa919");
+                builder.addHeader("Content-Type","application/json");
                 request = builder.build();
                 return chain.proceed(request);
             }

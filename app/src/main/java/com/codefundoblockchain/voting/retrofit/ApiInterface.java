@@ -1,12 +1,17 @@
 package com.codefundoblockchain.voting.retrofit;
 
+import com.codefundoblockchain.voting.APIModels.CreateFaceIDBodyModel;
+import com.codefundoblockchain.voting.APIModels.CreateFaceIDModel;
 import com.codefundoblockchain.voting.APIModels.GetAllCandidates;
 import com.codefundoblockchain.voting.APIModels.GetAllElections;
 import com.codefundoblockchain.voting.APIModels.CreateOTPModel;
 import com.codefundoblockchain.voting.APIModels.GetUserInfo;
+import com.codefundoblockchain.voting.APIModels.VerifyBodyModel;
+import com.codefundoblockchain.voting.APIModels.VerifyFaceIDModel;
 import com.codefundoblockchain.voting.APIModels.VerifyOTPModel;
 import com.codefundoblockchain.voting.APIModels.VoteBodyModel;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -42,5 +47,12 @@ public interface ApiInterface {
 
     @POST("api/v1/contracts/{id}/actions")
     Call<Void> voteCandidate(@Path("id") String id, @Body VoteBodyModel body);
+
+    @POST("Verify")
+    Call<VerifyFaceIDModel> verifyFaceId(@Body VerifyBodyModel body);
+
+    @POST("detect")
+    Call<List<CreateFaceIDModel>> createFaceId(@Body CreateFaceIDBodyModel body);
+
 
 }

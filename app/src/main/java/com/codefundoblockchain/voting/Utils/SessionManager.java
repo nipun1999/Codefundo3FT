@@ -19,6 +19,7 @@ public class SessionManager{
     private String APPLICATION_ID = "application_id";
     private String CONTRACT_ID = "contract_id";
     private String USER_ID = "user_id";
+    private String PROFILE_PIC_LINK = "profile_pic_link";
 
     public SessionManager(Context context) {
         this.ctx = context;
@@ -28,6 +29,16 @@ public class SessionManager{
 
     public String getUSER_ID(){
         return sharedPreferences.getString(USER_ID,null);
+    }
+
+
+    public String getPROFILE_PIC_LINK(){
+        return sharedPreferences.getString(PROFILE_PIC_LINK,null);
+    }
+
+    public void setPROFILE_PIC_LINK(String link){
+        editor.putString(PROFILE_PIC_LINK,link);
+        editor.commit();
     }
 
     public void setUSER_ID(String id){

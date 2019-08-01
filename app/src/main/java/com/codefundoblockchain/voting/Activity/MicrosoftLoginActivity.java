@@ -55,7 +55,7 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
         final android.webkit.CookieManager cookieManager = CookieManager.getInstance();
 
         loginWebView.getSettings().setJavaScriptEnabled(true);
-        loginWebView.loadUrl("https://login.microsoftonline.com/agarwalnipun12gmail.onmicrosoft.com/oauth2/authorize?resource=35c36543-8455-46a5-b470-25ff1d027cc7&client_id=35c36543-8455-46a5-b470-25ff1d027cc7&response_type=token&redirect_uri=https://electblockchain-2vifev.azurewebsites.net");
+        loginWebView.loadUrl("https://login.microsoftonline.com/yashhsmgmail.onmicrosoft.com/oauth2/authorize?resource=4a3c1b2e-4831-4638-b397-fedc9221cfb1&client_id=4a3c1b2e-4831-4638-b397-fedc9221cfb1&response_type=token&redirect_uri=https://elections2-zekgy4.azurewebsites.net");
 
         pd.show();
 
@@ -130,6 +130,7 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                                     sessionManager.setUSER_ID(profile.getKey());
                                     sessionManager.setFIRST_NAME(profile.child("firstName").getValue().toString());
                                     sessionManager.setLAST_NAME(profile.child("lastName").getValue().toString());
+                                    sessionManager.setPROFILE_PIC_LINK(profile.child("profilePic").getValue().toString());
                                     newUser = profile.child("newUser").getValue().toString();
                                     Log.e("register","inside final");
                                     flag = 1;

@@ -137,12 +137,14 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-            transaction.replace(R.id.content, new GetAllCandidateReviews()).addToBackStack("tag").commit();
+            Intent intent = new Intent(HomeActivity.this,FaceUploadActivity.class);
+            startActivity(intent);
 
 
         } else if (id == R.id.nav_share) {
 
-
+            Intent intent = new Intent(HomeActivity.this,FaceVerificationActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
 
