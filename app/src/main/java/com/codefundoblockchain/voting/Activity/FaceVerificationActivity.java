@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.codefundoblockchain.voting.APIModels.CreateFaceIDBodyModel;
 import com.codefundoblockchain.voting.APIModels.CreateFaceIDModel;
+import com.codefundoblockchain.voting.APIModels.VerifyBodyModel;
+import com.codefundoblockchain.voting.APIModels.VerifyFaceIDModel;
 import com.codefundoblockchain.voting.R;
 import com.codefundoblockchain.voting.Utils.SessionManager;
 import com.codefundoblockchain.voting.retrofit.FaceApiClient;
@@ -55,6 +57,9 @@ public class FaceVerificationActivity extends AppCompatActivity {
     private byte[] compressedData;
     private String profilePicFaceId=null;
     private String responseString=null;
+    private String faceid1;
+    private String faceid2;
+    private Uri downloadUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +111,18 @@ public class FaceVerificationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CreateFaceIDModel>> call, Response<List<CreateFaceIDModel>> response) {
                 if(response.code()==200){
-                    responseString = response.body().get(0).getFaceId();
-                    Log.e("faceID",responseString);
-                    Toast.makeText(FaceVerificationActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                    if(response.body().size()!=0){
+                        responseString = response.body().get(0).getFaceId();
+                        Log.e("faceID",responseString);
+                        faceid1 = response.body().get(0).getFaceId();
+                        CreateProfilePicFaceId2(downloadUrl.toString());
+                    }else{
+                        pd.dismiss();
+                        Toast.makeText(FaceVerificationActivity.this, "No face recognised", Toast.LENGTH_SHORT).show();
+                    }
+
                 }else{
+                    pd.dismiss();
                     if (response.code() == 400) {
                         if(!response.isSuccessful()) {
                             JSONObject jsonObject = null;
@@ -131,6 +144,7 @@ public class FaceVerificationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<CreateFaceIDModel>> call, Throwable t) {
+                pd.dismiss();
                 Log.e("faceID",t.toString());
                 Toast.makeText(FaceVerificationActivity.this, "Failed to get your profile ID", Toast.LENGTH_SHORT).show();
             }
@@ -152,12 +166,111 @@ public class FaceVerificationActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                pd.dismiss();
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                downloadUrl = taskSnapshot.getDownloadUrl();
                 Log.e("faceId",sessionManager.getPROFILE_PIC_LINK());
-                CreateProfilePicFaceId1(sessionManager.getPROFILE_PIC_LINK());
+                faceid1 = CreateProfilePicFaceId1(sessionManager.getPROFILE_PIC_LINK());
+            }
+        });
+    }
 
+    private String CreateProfilePicFaceId2(String s) {
 
+        CreateFaceIDBodyModel body = new CreateFaceIDBodyModel();
+        body.setUrl(s);
+        Call<List<CreateFaceIDModel>> call = FaceApiClient.getClient().createFaceId(body);
+        call.enqueue(new Callback<List<CreateFaceIDModel>>() {
+            @Override
+            public void onResponse(Call<List<CreateFaceIDModel>> call, Response<List<CreateFaceIDModel>> response) {
+                if(response.code()==200){
+                    if(response.body().size()!=0){
+                        responseString = response.body().get(0).getFaceId();
+                        faceid2 = response.body().get(0).getFaceId();
+                        VerifyFaceId();
+                        Log.e("faceID",responseString);
+                    }else{
+                        pd.dismiss();
+                        Toast.makeText(FaceVerificationActivity.this, "No face recognised", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    pd.dismiss();
+                    if (response.code() == 400) {
+                        if(!response.isSuccessful()) {
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = new JSONObject(response.errorBody().string());
+                                String userMessage = jsonObject.getString("message");
+                                String internalMessage = jsonObject.getString("code");
+                                Log.e("message",userMessage);
+                                Log.e("code",internalMessage);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CreateFaceIDModel>> call, Throwable t) {
+                pd.dismiss();
+                Log.e("faceID",t.toString());
+                Toast.makeText(FaceVerificationActivity.this, "Failed to get your profile ID", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return responseString;
+
+    }
+
+    private void VerifyFaceId() {
+        VerifyBodyModel body = new VerifyBodyModel();
+        body.setFaceId1(faceid1);
+        body.setFaceid2(faceid2);
+
+        Log.e("faceID1",faceid1);
+        Log.e("faceID2",faceid2);
+
+        Call<VerifyFaceIDModel> call = FaceApiClient.getClient().verifyFaceId(body);
+        call.enqueue(new Callback<VerifyFaceIDModel>() {
+            @Override
+            public void onResponse(Call<VerifyFaceIDModel> call, Response<VerifyFaceIDModel> response) {
+                pd.dismiss();
+                if(response.code()==200){
+                    if(response.body().getIsIdentical()){
+                        Toast.makeText(FaceVerificationActivity.this, "Verification Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(FaceVerificationActivity.this,Pin_Verification_Activity.class);
+                        startActivity(intent);
+                    }else{
+                        Log.e("faceID",Integer.toString(response.code()));
+                        Log.e("faceID",response.message().toString());
+                        Toast.makeText(FaceVerificationActivity.this, "Only authorised person is allowed to vote", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    try {
+                        JSONObject jsonObject = null;
+                        jsonObject = new JSONObject(response.errorBody().string());
+                        String userMessage = jsonObject.getString("message");
+                        String internalMessage = jsonObject.getString("code");
+                        Log.e("message",userMessage);
+                        Log.e("code",internalMessage);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.e("faceID",Integer.toString(response.code()));
+                    Log.e("faceID",response.message().toString());
+                    Toast.makeText(FaceVerificationActivity.this, "Failed to verify", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VerifyFaceIDModel> call, Throwable t) {
+                pd.dismiss();
+                Toast.makeText(FaceVerificationActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
             }
         });
     }
