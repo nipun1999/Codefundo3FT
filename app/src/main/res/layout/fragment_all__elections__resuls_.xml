@@ -26,7 +26,7 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/ralewaybold"
-            android:text="Select Election to Get Results"/>
+            android:text="Select Election"/>
     </LinearLayout>
 
 

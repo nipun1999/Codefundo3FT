@@ -39,6 +39,7 @@ public class All_Elections_Resuls_Fragment extends Fragment {
     private UpcomingElectionsRecyclerAdapter electionsRecyclerAdapter;
     private ProgressDialog pd;
     private List<ElectionDetailsModel> electionsList = new ArrayList<>();
+    private String value = null;
 
     public All_Elections_Resuls_Fragment() {
         // Required empty public constructor
@@ -53,11 +54,21 @@ public class All_Elections_Resuls_Fragment extends Fragment {
         UpcomingElectionsRecycler = view.findViewById(R.id.upcomingElectionsResultsRecycler);
         RecyclerView.LayoutManager electionsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
 
-        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"results");
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+            value = bundle.getString("reason");
+            Log.e("value",value);
+        }
+
+        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"results",value);
 
         UpcomingElectionsRecycler.setLayoutManager(electionsLayoutManager);
         UpcomingElectionsRecycler.setItemAnimator(new DefaultItemAnimator());
         UpcomingElectionsRecycler.setAdapter(electionsRecyclerAdapter);
+
+
+
+
 
         pd = new ProgressDialog(getActivity());
         pd.setMessage("loading");

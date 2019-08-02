@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
 import com.codefundoblockchain.voting.Fragments.Candidate_detail_fragment;
+import com.codefundoblockchain.voting.Fragments.Election_Result_Fragment;
 import com.codefundoblockchain.voting.Fragments.GetAllCandidateReviews;
 import com.codefundoblockchain.voting.Fragments.Home_Fragment;
 import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
@@ -137,8 +138,12 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-            Intent intent = new Intent(HomeActivity.this,FaceUploadActivity.class);
-            startActivity(intent);
+            All_Elections_Resuls_Fragment getAllCandidates = new All_Elections_Resuls_Fragment();
+            Bundle bundle=new Bundle();
+            bundle.putString("reason","candidatesReview");
+            getAllCandidates.setArguments(bundle);
+            transaction.replace(R.id.content, getAllCandidates).addToBackStack("tag").commit();
+
 
 
         } else if (id == R.id.nav_share) {

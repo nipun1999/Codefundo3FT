@@ -6,6 +6,8 @@ import com.codefundoblockchain.voting.APIModels.GetAllCandidates;
 import com.codefundoblockchain.voting.APIModels.GetAllElections;
 import com.codefundoblockchain.voting.APIModels.CreateOTPModel;
 import com.codefundoblockchain.voting.APIModels.GetUserInfo;
+import com.codefundoblockchain.voting.APIModels.SentimentalAnalysisBodyModel;
+import com.codefundoblockchain.voting.APIModels.SentimentalAnalysisModel;
 import com.codefundoblockchain.voting.APIModels.VerifyBodyModel;
 import com.codefundoblockchain.voting.APIModels.VerifyFaceIDModel;
 import com.codefundoblockchain.voting.APIModels.VerifyOTPModel;
@@ -53,6 +55,9 @@ public interface ApiInterface {
 
     @POST("detect")
     Call<List<CreateFaceIDModel>> createFaceId(@Body CreateFaceIDBodyModel body);
+
+    @POST("sentiment")
+    Call<SentimentalAnalysisModel> analyseText(@Body SentimentalAnalysisBodyModel body);
 
 
 }

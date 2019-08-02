@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".Fragments.AddReview">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextBlue"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/ralewaybold"
+        android:text="Add Review"/>
+
+    <Spinner
+        android:id="@+id/nameSpinner"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content"></Spinner>
+
+
+    <EditText
+        android:id="@+id/reviewEdtTxt"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="top"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/ralewayregular"
+        android:textColor="@android:color/black"
+        android:textSize="14dp"
+        android:hint="Write your review. Please note that you can only submit one review for a candidate and will be checked artifically for positive or negative comment."
+        android:layout_height="wrap_content"
+        android:lines="8"
+        android:background="@drawable/curved_edit_text"/>
+
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="302dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="SUBMIT"
+        android:fontFamily="@font/ralewaysemibold"
+        android:textSize="24dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/curved_pink_button"/>
+
+
+
+</LinearLayout>

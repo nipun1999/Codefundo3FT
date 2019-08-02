@@ -113,6 +113,7 @@ public class Select_Candidate_Fragment extends Fragment {
 
                 }else if(response.code()==401){
                     Intent intent = new Intent(getActivity(),MicrosoftLoginActivity.class);
+                    intent.putExtra("activity","selectCandidate");
                     startActivity(intent);
                 }else{
                     Toast.makeText(getActivity(), "Cant load the candidates", Toast.LENGTH_SHORT).show();

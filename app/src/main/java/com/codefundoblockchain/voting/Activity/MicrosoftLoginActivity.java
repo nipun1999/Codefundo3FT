@@ -3,6 +3,8 @@ package com.codefundoblockchain.voting.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.codefundoblockchain.voting.APIModels.GetUserInfo;
+import com.codefundoblockchain.voting.Fragments.Select_Candidate_Fragment;
 import com.codefundoblockchain.voting.R;
 import com.codefundoblockchain.voting.Utils.SessionManager;
 import com.codefundoblockchain.voting.retrofit.AzureApiClient;
@@ -35,6 +38,7 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
     private DatabaseReference mdatabase;
     private int flag = 0;
     private String newUser;
+    private String activity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
 
         loginWebView = findViewById(R.id.loginWebView);
         sessionManager = new SessionManager(this);
+
+        Intent i = getIntent();
+        activity = i.getStringExtra("activity");
 
         pd = new ProgressDialog(this);
         pd.setMessage("loading");
@@ -146,8 +153,16 @@ public class MicrosoftLoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MicrosoftLoginActivity.this,Walkthrough.class);
                                     startActivity(intent);
                                 }else{
-                                    Intent intent = new Intent(MicrosoftLoginActivity.this,HomeActivity.class);
-                                    startActivity(intent);
+                                    if(activity!=null){
+                                        Fragment fragment = new Select_Candidate_Fragment();
+                                        FragmentManager fragmentManager = getSupportFragmentManager();
+                                        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                                    }else{
+                                        Intent intent = new Intent(MicrosoftLoginActivity.this,HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+
+
                                 }
 
                             }else{

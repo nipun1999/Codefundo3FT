@@ -95,7 +95,7 @@ public class Home_Fragment extends Fragment {
 //        electionsList.add(elections);
 
 
-        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"vote");
+        electionsRecyclerAdapter = new UpcomingElectionsRecyclerAdapter(electionsList,getActivity(),"vote",null);
         newsRecyclerAdapter = new WhatsNewRecyclerAdapter(newsList);
 
         whatsNewRecycler.setLayoutManager(newsLayoutManager);
