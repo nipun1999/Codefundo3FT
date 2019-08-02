@@ -81,7 +81,7 @@ public class mobileVerificationActivity extends AppCompatActivity {
                         if(response.body().getValid()){
                             Toast.makeText(mobileVerificationActivity.this, "Otp Verified Successfully", Toast.LENGTH_SHORT).show();
                             if(status.equals("vote")){
-                                Intent intent = new Intent(mobileVerificationActivity.this,Pin_Verification_Activity.class);
+                                Intent intent = new Intent(mobileVerificationActivity.this,FaceVerificationActivity.class);
                                 startActivity(intent);
                             }else{
                                 Intent intent = new Intent(mobileVerificationActivity.this,Pin_generation_activity.class);
