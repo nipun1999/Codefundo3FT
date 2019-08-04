@@ -26,7 +26,7 @@ public class FaceApiClient {
     public static ApiInterface getClient() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://electionfaceverification.cognitiveservices.azure.com/face/v1.0/")
+                    .baseUrl("https://electionfaceapi.cognitiveservices.azure.com/face/v1.0/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient()).build();
 
@@ -50,7 +50,7 @@ public class FaceApiClient {
                 Request.Builder builder = request.newBuilder();
                 String authToken = App.getInstance().getSessionManager().getBEARER_TOKEN();
                 Log.e("token",App.getInstance().getSessionManager().getBEARER_TOKEN());
-                builder.addHeader("Ocp-Apim-Subscription-Key", "6529442affde42a8906f7adb91caa919");
+                builder.addHeader("Ocp-Apim-Subscription-Key", "715bb27cf48f4b37bfd270ea2b66afd0");
                 builder.addHeader("Content-Type","application/json");
                 request = builder.build();
                 return chain.proceed(request);

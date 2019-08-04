@@ -26,7 +26,7 @@ public class SentimentalAnalysisApiClient {
     public static ApiInterface getClient() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://sentimentalapi.cognitiveservices.azure.com/text/analytics/v2.1/")
+                    .baseUrl("https://electionreview.cognitiveservices.azure.com/text/analytics/v2.1/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient()).build();
 
@@ -50,7 +50,7 @@ public class SentimentalAnalysisApiClient {
                 Request.Builder builder = request.newBuilder();
                 String authToken = App.getInstance().getSessionManager().getBEARER_TOKEN();
                 Log.e("token",App.getInstance().getSessionManager().getBEARER_TOKEN());
-                builder.addHeader("Ocp-Apim-Subscription-Key", "07df69c3a2744a06ba0a39647a1d1820");
+                builder.addHeader("Ocp-Apim-Subscription-Key", "3ad7e3027f3e485385bce5b7df40d1e9");
                 builder.addHeader("Content-Type","application/json");
                 request = builder.build();
                 return chain.proceed(request);

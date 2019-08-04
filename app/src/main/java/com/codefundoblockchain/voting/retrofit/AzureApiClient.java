@@ -26,7 +26,7 @@ public class AzureApiClient {
     public static ApiInterface getClient() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://elections2-zekgy4-api.azurewebsites.net")
+                    .baseUrl("https://myblockchain-2et5ca-api.azurewebsites.net")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient()).build();
 
