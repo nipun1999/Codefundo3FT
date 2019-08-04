@@ -14,14 +14,15 @@
 
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="VotZure"
-        android:fontFamily="@font/ralewaymedium"
+        android:text="Welcome"
+        android:id="@+id/nameTxtView"
         android:textSize="20dp"
+        android:layout_marginBottom="15dp"
         android:textColor="@android:color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:fontFamily="@font/ralewaymedium"/>
+
 
     <TextView
         android:id="@+id/textView"

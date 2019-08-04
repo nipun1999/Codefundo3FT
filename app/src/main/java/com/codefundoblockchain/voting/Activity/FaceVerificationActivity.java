@@ -209,6 +209,8 @@ public class FaceVerificationActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
+                    }else{
+                        Toast.makeText(FaceVerificationActivity.this, "Sorry, Cant Process Right now", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

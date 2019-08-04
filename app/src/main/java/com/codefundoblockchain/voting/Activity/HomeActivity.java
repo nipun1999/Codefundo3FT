@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codefundoblockchain.voting.Fragments.All_Elections_Resuls_Fragment;
@@ -58,6 +60,11 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView text = (TextView) header.findViewById(R.id.nameTxtView);
+
+        text.setText("Welcome "+sessionManager.getFIRST_NAME());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -148,11 +155,16 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-            Intent intent = new Intent(HomeActivity.this,FaceVerificationActivity.class);
+            String shareBody = "Hi, I am inviting you to vote for the election using VotZure which makes the voting extremely secure using 3FA and blockchain services";
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "VotZure");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+        } else if (id == R.id.nav_log_out) {
+            Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
