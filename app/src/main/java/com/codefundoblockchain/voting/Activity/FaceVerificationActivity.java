@@ -117,6 +117,7 @@ public class FaceVerificationActivity extends AppCompatActivity {
                         faceid1 = response.body().get(0).getFaceId();
                         CreateProfilePicFaceId2(downloadUrl.toString());
                     }else{
+                        Log.e("face",response.message());
                         pd.dismiss();
                         Toast.makeText(FaceVerificationActivity.this, "No face recognised", Toast.LENGTH_SHORT).show();
                     }

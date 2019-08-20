@@ -84,7 +84,7 @@ public class Pin_Verification_Activity extends AppCompatActivity {
 //                        map.put("workflowFunctionID","25");
 //                        map.put("workflowActionParameters","");
                         VoteBodyModel body = new VoteBodyModel();
-                        body.setWorkflowFunctionID(2);
+                        body.setWorkflowFunctionID(14);
                         body.setWorkflowActionParameters(list);
 
                         Call call = AzureApiClient.getClient().voteCandidate(sessionManager.getCONTRACT_ID(),body);

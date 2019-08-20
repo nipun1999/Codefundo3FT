@@ -1,0 +1,189 @@
+{
+    "ApplicationName": "Elections",
+    "DisplayName": "General Elections",
+    "Description": "Vote for the annual general elections, Make an informed decision and vote through the secured blockchain platform developed by 3FT",
+    "ApplicationRoles": [
+      {
+        "Name": "Maintainer",
+        "Description": "Role Who takes care of the elections, like adding voters, candidates etc."
+      },
+      {
+        "Name": "Candidate",
+        "Description": "Candidate contesting for the election"
+      },
+      {
+        "Name": "Voter",
+        "Description": "Who votes in the elections"
+      }
+    ],
+    "Workflows": [
+      {
+        "Name": "Elections",
+        "DisplayName": "Elections",
+        "Description": "Handles the business logic for a simple voting system",
+        "Initiators": [ "Maintainer" ],
+        "StartState":  "candidateListed",
+        "Properties": [
+          {
+            "Name": "State",
+            "DisplayName": "State",
+            "Description": "Holds the state of the contract",
+            "Type": {
+              "Name": "state"
+            }
+          },
+          {
+            "Name": "candidateAddress",
+            "DisplayName": "Candidate",
+            "Description": "Address of Candidate",
+            "Type": {
+              "Name": "Candidate"
+            }
+          },
+          {
+            "Name": "candidateVotes",
+            "DisplayName": "Votes",
+            "Description": "Votes of the candidate",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "candidateParty",
+            "DisplayName": "Candidate Party",
+            "Description": "The party of the candidate",
+            "Type": {
+              "Name": "string"
+            }
+          },
+
+          {
+            "Name": "CandidateName",
+            "DisplayName": "Candidate Name",
+            "Description": "The name of the candidate",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "Maintainer",
+            "DisplayName": "Maintainer",
+            "Description": "Maintains the election",
+            "Type":{
+                "Name": "Maintainer"
+            }  
+          },
+          {
+            "Name": "Voter",
+            "DisplayName": "Voter",
+            "Description": "Votes in the election",
+            "Type":{
+                "Name": "Voter"
+            }  
+          }
+          
+        ],
+        "Constructor": {
+          "Parameters": [
+            {
+              "Name": "candidate",
+              "Description": "Candidate contesting for elections",
+              "DisplayName": "Candidate",
+              "Type": {
+                "Name": "Candidate"
+              }
+            },
+            {
+              "Name": "party",
+              "Description": "Party for the candidate",
+              "DisplayName": "Party",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "name",
+              "Description": "Name for the candidate",
+              "DisplayName": "Name",
+              "Type": {
+                "Name": "string"
+              }
+            }
+          ]
+        },
+        "Functions": [
+          {
+            "Name": "vote",
+            "DisplayName": "Vote",
+            "Description": "Vote for Candidate",
+            "Parameters": []
+          },
+          {
+            "Name": "terminate",
+            "DisplayName": "Terminate",
+            "Description": "Terminate the elections",
+            "Parameters": []
+          },
+          {
+            "Name": "begin",
+            "DisplayName": "Begin",
+            "Description": "Begin the elections",
+            "Parameters": []
+          }
+        ],
+        "States": [
+          {
+            "Name": "candidateListed",
+            "DisplayName": "Candidate Listed",
+            "Description": "The candidate is Listed",
+            "PercentComplete": 20,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": [ "Maintainer" ],
+                "AllowedInstanceRoles": [],
+                "Description": "List The Candidate",
+                "Function": "begin",
+                "NextStates": [ "votingBegins" ],
+                "DisplayName": "Begin Voting"
+              }
+            ]
+          },
+          {
+            "Name": "votingBegins",
+            "DisplayName": "Voting Begins",
+            "Description": "Voting begins for the candidate",
+            "PercentComplete": 50,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": [ "Voter" ],
+                "AllowedInstanceRoles": [ "Voter" ],
+                "Description": "Vote for the candidate",
+                "Function": "vote",
+                "NextStates": [ "votingBegins" ],
+                "DisplayName": "Voted"
+              },
+              {
+                "AllowedRoles": [ ],
+                "AllowedInstanceRoles": [ "Maintainer" ],
+                "Description": "Terminate the election",
+                "Function": "terminate",
+                "NextStates": [ "votingEnds" ],
+                "DisplayName": "Voting Ended"
+              }
+            ]
+          },
+          {
+            "Name": "votingEnds",
+            "DisplayName": "Votging Finished",
+            "Description": "Voting completed",
+            "PercentComplete": 100,
+            "Style": "Success",
+            "Transitions": []
+          }
+        ]
+      }
+    ]
+  }
+  
