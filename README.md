@@ -12,3 +12,5 @@ The Blockchain Architect also facilitates real-time tracking of votes and Auditi
 ## Mockups for Android Application
 Link for the mockups of the android application we will be developing
 https://www.figma.com/file/KZdU1yAOzFkXFa60HTowZvfm/codeFundoBlockchain?node-id=0%3A1
+## Video of Prototype
+https://www.youtube.com/watch?v=jrbZp7KXZmI
