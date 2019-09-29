@@ -1,3 +1,5 @@
+# 2nd Position in Microsoft Codefundo19
+
 ## Introduction
 We aim to revolutionise the current polling Process with the help of Blockchain or DLT on a mission to making voting safer and more inclusive. The solution that we propose shall be a one-stop solution for all polls and referendums in our country and Worldwide. It incorporates the immutable and distributed aspects of the Blockchain Architecture, i.e, it will have a distributed ledger on the Ethereum Blockchain and it will be used to store votes and it will be immutable. In the specific case of Indian Elections, Aadhar based identification will prove really efficient because of the biometric data that Aadhar collects for each and every Aadhar holder.
 
